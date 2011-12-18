@@ -1,4 +1,4 @@
-(defproject speech-synthesis "1.0.0"
+(defproject facts/speech-synthesis "1.0.0"
   :description "A library to speak text."
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [clj-http "0.2.5"]
