@@ -1,8 +1,6 @@
 (ns speech-synthesis.say
-  (:require [clj-http.client :as client]
-            [fs.core :as fs]
-            [clojure.java.io :as io])
-  (:import (java.io File FileOutputStream)
+  (:require [clj-http.client :as client])
+  (:import (java.io File FileOutputStream ByteArrayInputStream)
            (javazoom.jl.player Player)))
 
 (defn say [response]
@@ -10,9 +8,6 @@
                         {:query-params {"ie" "UTF-8"
                                         "tl" "en"
                                         "q" response}
-                         :as :byte-array}))
-        file (fs/temp-file "say" ".mp3")]
-    (with-open [file (FileOutputStream. file)]
-      (.write file mp3))
-    (with-open [player (new Player (io/input-stream file))]
+                         :as :byte-array})) ]
+    (with-open [player (new Player (ByteArrayInputStream. mp3))]
       (.play player))))
